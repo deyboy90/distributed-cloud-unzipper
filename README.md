@@ -25,8 +25,18 @@ java -jar distributed-cloud-app.jar \
 --cloud ON_PREM
 ```
 
+
+### Running on kubernetes
+
 For easier testing with local kubernetes the app can be deployed on a local registry
 `docker run -d -p 5000:5000 --restart=always --name registry registry:2`
 
 Now push the image
 `docker push localhost:5000/distributed-cloud-unzipper:0.1`
+
+Deploy the job on kubernetes
+`kubectl apply -f job-local.yaml`
+
+Check the job status, all pods should be completed
+`kubectl get jobs`
+

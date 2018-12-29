@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: run-distributed-app
+spec:
+  completions: 3
+  parallelism: 3
+  template:
+    metadata:
+      name: distributed-app
+
+    spec:
+      volumes:
+      - name: shared-data
+        hostPath:
+          path: /Users/deyarchit/Projects/Eclipse_Workspace/distributed-cloud-unzipper/src/main/resources
+      containers:
+      - name: distributed-app
+        image: localhost:5000/distributed-cloud-unzipper:0.1
+        volumeMounts:
+        - name: shared-data
+          mountPath: /home
+        command: [ "bash"]
+        args:
+         - startup.sh
+        env:
+          - name: MY_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+      restartPolicy: Never
+  backoffLimit: 4
