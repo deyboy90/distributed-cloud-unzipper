@@ -31,8 +31,18 @@ public class Configs {
     @Parameter(names = "--remoteDir", description = "Remote dir which contains the zips")
     private Path remoteDir = Paths.get("src/main/resources/remote");
     
+    @Parameter(names = "--cloud", description = "Where is the app running on-prem/aws/gcp")
+    private Cloud cloud = Cloud.ON_PREM;
+    
+    @Parameter(names = "--dry", description = "If true then no file writing is performed")
+    private boolean dry = false;
     
     
+    public enum Cloud {
+    	ON_PREM,
+    	AWS,
+    	GCP
+    }
     
     
     public void init(String... args) {
