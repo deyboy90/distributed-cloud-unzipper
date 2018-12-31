@@ -29,11 +29,11 @@ spec:
               fieldRef:
                 fieldPath: status.podIP
           - name: REMOTE_DIR
-            value: "/home/remote"
+            value: "/coverage-bucket/remote"
           - name: WORK_DIR
             value: "/home/work"
           - name: CLOUD
-            value: "ON_PREM"
+            value: "GCP"
 
       restartPolicy: Never
   backoffLimit: 1

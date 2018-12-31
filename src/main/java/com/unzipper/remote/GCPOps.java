@@ -1,14 +1,11 @@
 package com.unzipper.remote;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import org.apache.commons.io.FileUtils;
 
 import com.google.api.gax.paging.Page;
 import com.google.cloud.storage.Blob;
@@ -25,6 +22,7 @@ public class GCPOps implements FileOps {
 	Storage storage;
 
 	public GCPOps() {
+		log.info("Initalizing gcs storage");
 		storage = StorageOptions.getDefaultInstance().getService();
 	}
 

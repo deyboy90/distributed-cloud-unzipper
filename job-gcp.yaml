@@ -13,7 +13,7 @@ spec:
       volumes:
       - name: shared-data
         hostPath:
-          path: /Users/deyarchit/Projects/Eclipse_Workspace/distributed-cloud-unzipper/src/main/resources
+          path: /home
       containers:
       - name: distributed-app
         image: deyboy90/distributed-cloud-unzipper:0.1
@@ -35,4 +35,4 @@ spec:
           - name: CLOUD
             value: "GCP"
       restartPolicy: Never
-  backoffLimit: 4
+  backoffLimit: 1

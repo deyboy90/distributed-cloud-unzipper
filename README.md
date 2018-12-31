@@ -82,8 +82,28 @@ Install & initialize gcloud tools for mac: https://cloud.google.com/sdk/docs/qui
 Run `gcloud init` to initialize api credentials locally. (Note: this will count towards your cloud api usage limits)
 
 
-### Running 
+### Running on Google Kubernetes Engine
 
+Build and Push the image to docker hub ( or google container registry )
+`docker build . -t deyboy90/distributed-cloud-unzipper:0.1 ` 
+`docker push deyboy90/distributed-cloud-unzipper:0.1`
+
+Setting up access to the kubernetes API, so that they can be called from inside the container (needed for getting the pods which used to build consistent hash) 
+```
+# Get the user account
+gcloud info | grep Account
+<myname>@<example.org>
+
+# Grant cluster-admin to your current identity
+kubectl create clusterrolebinding myname-cluster-admin-binding --clusterrole=cluster-admin --user=myname@example.org
+
+# Create cluster role which enables access to reading pods
+kubectl create -f pod-reader-clusterrole.yaml
+
+# Create cluster binding to the cluster role created above
+kubectl create clusterrolebinding deyboy90-pod-reader --clusterrole=pod-reader --serviceaccount=default:default
+```
+ 
 
 
 

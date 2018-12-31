@@ -91,8 +91,4 @@ public class UnzipService {
 		}
 	}
 
-//	private boolean filterExtension(Path file, String extension) {
-//		return file.getFileName().toString().endsWith(extension);
-//	}
-
 }
