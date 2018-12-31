@@ -12,8 +12,17 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class LocalOps implements FileOps {
-
+	
 	@Override
+	public void download(Path remote, Path local, boolean dryRun) {
+		this.copy(remote, local, dryRun);
+	}
+	
+	@Override
+	public void upload(Path local, Path remote, boolean dryRun) {
+		this.copy(local, remote, dryRun);
+	}
+
 	public void copy(Path source, Path destinationDirectory, boolean dryRun) {
 		log.info("Copying from: {} ,to: {}", source, destinationDirectory);
 		
@@ -50,5 +59,7 @@ public class LocalOps implements FileOps {
 		}
 		return fileNames;
 	}
+
+	
 
 }

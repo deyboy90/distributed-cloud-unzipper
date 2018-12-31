@@ -3,9 +3,9 @@
 TOTAL_FILES=$1
 TOTAL_ZIPS=$2
 TOTAL_FILES_PER_ZIP=$(( $TOTAL_FILES / $TOTAL_ZIPS ))
-COUNT=0
+COUNT=1
 
-for (( n=0; n<=$TOTAL_FILES; n++)); do
+for (( n=1; n<=$TOTAL_FILES; n++)); do
     dd if=/dev/urandom of=file$( printf %03d "$n" ).bin bs=1 count=$(( RANDOM + 1024 ))
     
     NUM=$(( $n % $TOTAL_FILES_PER_ZIP ))

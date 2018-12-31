@@ -16,7 +16,7 @@ spec:
           path: /Users/deyarchit/Projects/Eclipse_Workspace/distributed-cloud-unzipper/src/main/resources
       containers:
       - name: distributed-app
-        image: localhost:5000/distributed-cloud-unzipper:0.1
+        image: deyboy90/distributed-cloud-unzipper:0.1
         volumeMounts:
         - name: shared-data
           mountPath: /home
@@ -29,11 +29,10 @@ spec:
               fieldRef:
                 fieldPath: status.podIP
           - name: REMOTE_DIR
-            value: "/home/remote"
+            value: "/coverage-bucket/remote"
           - name: WORK_DIR
-            value: "/home/work"
+            value: "/home"
           - name: CLOUD
-            value: "ON_PREM"
-
+            value: "GCP"
       restartPolicy: Never
   backoffLimit: 4

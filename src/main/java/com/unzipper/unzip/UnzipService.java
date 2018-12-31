@@ -10,6 +10,7 @@ import com.google.common.hash.Hashing;
 import com.unzipper.config.Configs;
 import com.unzipper.config.Configs.Cloud;
 import com.unzipper.remote.FileOps;
+import com.unzipper.remote.GCPOps;
 import com.unzipper.remote.LocalOps;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,8 +34,8 @@ public class UnzipService {
 
 	private void initFileOps() {
 		if (conf.getCloud().equals(Cloud.GCP)) {
-			// TODO:
 			log.info("Setting up gcp file ops");
+			fileOps = new GCPOps();
 		} else if (conf.getCloud().equals(Cloud.AWS)) {
 			// TODO:
 			log.info("Setting up aws file ops");
@@ -48,13 +49,13 @@ public class UnzipService {
 		String[] extensions = { "zip" };
 		for (String zipName : fileOps.ls(conf.getRemoteDir(), extensions)) {
 			if (filterBasedOnHash(zipName)) {
-				fileOps.copy(conf.getRemoteDir().resolve(zipName), conf.getWorkDir(), 
+				fileOps.download(conf.getRemoteDir().resolve(zipName), conf.getWorkDir(), 
 						conf.isDry());
 
 				unzip(conf.getWorkDir().resolve(zipName), conf.getWorkDir().resolve(conf.getCurrentWorker()),
 						conf.isDry());
 
-				fileOps.copy(conf.getWorkDir().resolve(conf.getCurrentWorker()), conf.getRemoteDir(), 
+				fileOps.upload(conf.getWorkDir().resolve(conf.getCurrentWorker()), conf.getRemoteDir(), 
 						conf.isDry());
 			}
 		}

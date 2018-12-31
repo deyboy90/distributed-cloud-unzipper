@@ -52,7 +52,7 @@ java -jar distributed-cloud-app.jar \
 ```
 
 
-### Running on kubernetes
+### Running on local kubernetes
 
 For easier testing with local kubernetes the app can be deployed on a local registry, only need to do it once as it is running in detached mode
 `docker run -d -p 5000:5000 --restart=always --name registry registry:2`
@@ -74,4 +74,16 @@ Check the status, all pods should be completed if they are successful
 `kubectl get jobs`
 
 After those commands, there should be 20 files under `src/main/resources/remote` folder
+
+
+### Running on local kubernetes with gcs
+
+Install & initialize gcloud tools for mac: https://cloud.google.com/sdk/docs/quickstart-macos
+Run `gcloud init` to initialize api credentials locally. (Note: this will count towards your cloud api usage limits)
+
+
+### Running 
+
+
+
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Waiting for all pods to come up
+# Static wait for all pods to come up, so that we get all pods which are expected to run
 sleep 10
 
 KUBE_TOKEN=$(</var/run/secrets/kubernetes.io/serviceaccount/token)
@@ -10,8 +10,8 @@ PODS=$( curl -sSk -H "Authorization: Bearer $KUBE_TOKEN"       https://$KUBERNET
 java -jar distributed-cloud-app.jar \
 --participatingWorkers $PODS \
 --currentWorker $MY_POD_IP \
---remoteDir /home/remote \
---workDir /home/work \
---cloud ON_PREM
+--remoteDir $REMOTE_DIR \
+--workDir $WORK_DIR \
+--cloud $CLOUD
 
 
