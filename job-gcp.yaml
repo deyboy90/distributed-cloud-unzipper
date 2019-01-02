@@ -3,8 +3,8 @@ kind: Job
 metadata:
   name: run-distributed-app
 spec:
-  completions: 3
-  parallelism: 3
+  completions: 6
+  parallelism: 6
   template:
     metadata:
       name: distributed-app
@@ -29,7 +29,7 @@ spec:
               fieldRef:
                 fieldPath: status.podIP
           - name: REMOTE_DIR
-            value: "/coverage-bucket/remote"
+            value: "/coverage-storage/remote"
           - name: WORK_DIR
             value: "/home"
           - name: CLOUD
