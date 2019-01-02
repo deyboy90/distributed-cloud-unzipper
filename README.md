@@ -3,7 +3,7 @@ Simple app to demonstrate distributed work using consistent hashing
 
 ### Running it locally
 
-![Alt text](images/k8-local.png?raw=true "Local Setup")
+![Alt text](/images/K8-local.png?raw=true "Local Setup")
 
 Generating some zip files for testing
 ```
@@ -88,7 +88,7 @@ Run `gcloud init` to initialize api credentials locally. (Note: this will count 
 
 ### Running on Google Kubernetes Engine
 
-![Alt text](images/k8-cloud.png?raw=true "Cloud Setup")
+![Alt text](/images/k8-cloud.png?raw=true "Cloud Setup")
 
 Build and Push the image to docker hub ( or google container registry )
 `docker build . -t deyboy90/distributed-cloud-unzipper:0.1 ` 
