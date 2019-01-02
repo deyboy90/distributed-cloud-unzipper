@@ -102,14 +102,14 @@ Setting up access to the kubernetes API, so that they can be called from inside 
 gcloud info | grep Account
 <myname>@<example.org>
 
-# Grant cluster-admin to your current identity
-kubectl create clusterrolebinding myname-cluster-admin-binding --clusterrole=cluster-admin --user=myname@example.org
+# Grant cluster-admin to your current identity, this is needed before adding a new cluster role to the current user
+kubectl create clusterrolebinding <myname>-cluster-admin-binding --clusterrole=cluster-admin --user=myname@example.org
 
 # Create cluster role which enables access to reading pods
 kubectl create -f pod-reader-clusterrole.yaml
 
 # Create cluster binding to the cluster role created above
-kubectl create clusterrolebinding deyboy90-pod-reader --clusterrole=pod-reader --serviceaccount=default:default
+kubectl create clusterrolebinding <myname>-pod-reader --clusterrole=pod-reader --serviceaccount=default:default
 ```
 
 Creating a storage bucket and upload zips
@@ -123,7 +123,7 @@ chmod a+x file-gen.sh
 ./file-gen 20 5 # should create 5 zips containing 4 files each
 
 # Upload to gcs using gsutils
-gsutil -m cp *.zip gs://coverage-storage/remote
+gsutil -m cp *.zip gs://<bucket>/remote
 ```
 
 Deploy the job on kubernetes
@@ -136,4 +136,3 @@ Check the status, all pods should be completed if they are successful
 
 After those commands, there should be 20 bin files under <bucket>/remote folder, use gsutil/browser to validate.
 `gsutil ls  gs://<bucket>/remote/*.bin | wc -l`
-
